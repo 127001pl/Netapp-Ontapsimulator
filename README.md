@@ -1,2 +1,2 @@
 # ontapsimulator
-Information on howto run an ONTAP  simulator on Proxmox
+Instruction on how to run an ONTAP simulator on Proxmox
