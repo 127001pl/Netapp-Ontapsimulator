@@ -61,7 +61,7 @@ Didn't describe here how to install, configure and manage a Proxmox server and h
 
 ![image](https://user-images.githubusercontent.com/115875629/208492704-d3be131b-ef8b-4ff3-8ec3-2b214c2fe4da.png)
 
-11. Convert and import all four .vmdk files as disks to the newly created VM. Please do it one by one to keep the order of original disks:
+11. Convert and import all four .vmdk files as disks to the newly created VM (here VM ID is 101 and this ID has to be the same as the provided ID in 'qm disk' command). Please do it one by one to keep the order of original disks:
 
 ```
 qm disk import 101 vsim-NetAppDOT-simulate-disk1.vmdk local-lvm -format qcow2
@@ -121,7 +121,7 @@ qm disk import 101 vsim-NetAppDOT-simulate-disk4.vmdk local-lvm -format qcow2
 19. For configuration of the Netapp ONTAPsimulator follow the Netapp documentation: Simulate ONTAP 9.10.1 Installation and Setup Guide
 
 ## Very Important Notes
-1. Backup of the ONTAPsimulator VM does not protect the simulator. After the restoration, the internal database is corrupted nad the simulator is not usable.
+1. Proxmox backup of the ONTAPsimulator (done on a working VM) does not protect the simulator. After the restoration from the backup, the internal database is corrupted and the simulator is not usable.
 
 ![image](https://user-images.githubusercontent.com/115875629/208877343-6e64c962-7323-46d4-a899-2689f4b6aef1.png)
 
@@ -129,4 +129,15 @@ After reboot:
 
 ![image](https://user-images.githubusercontent.com/115875629/208877560-6fbf7fff-f0cd-4de4-bda3-978a52a13413.png)
 
+2. A single node ONTAP cluster can be switched off from CLI (I did not test it with two node cluster):
+```
+system node halt
+```
 
+![image](https://user-images.githubusercontent.com/115875629/208902035-bca9578f-fa35-4a7f-b620-83be2c7af14e.png)
+
+When the system is waiting for physical power off, a VM with ONTAPsimulator can be safely switched off (via the Stop option in Proxmox).
+
+![image](https://user-images.githubusercontent.com/115875629/208902434-99434e30-4c7d-42ec-9bb1-4c87e37cab9b.png)
+
+3. To be honest, I have to mention, that on VMware Workstation I had to create a new simulator - almost every time when I powered it off. To be sure that switching off the ONTAPsimulator will not destroy it, you can take into account hibernation instead of powering it off. This kind of "stopping" ONTAP allows predicting with a higher probability that nothing will happen with the simulator. I did it many times with success.
