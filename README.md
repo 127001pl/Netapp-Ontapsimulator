@@ -1,7 +1,7 @@
 #
 # Instruction on how to successfully run an ONTAP simulator on Proxmox.
 
-- #### Index:
+#### Index:
 - [Overview](#overview)
 - [Prerequisites](#prerequisites)
 - [Instruction](#instruction)
