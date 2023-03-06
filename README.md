@@ -1,5 +1,5 @@
 #
-# Instruction on how to successfully run an ONTAP simulator on Proxmox.
+# Instruction on how to successfully run an Netapp ONTAP simulator on Proxmox.
 
 #### Index:
 - [Overview](#overview)
